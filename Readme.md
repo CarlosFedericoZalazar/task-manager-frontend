@@ -36,6 +36,7 @@ Este proyecto forma parte de mi entrenamiento para convertirme en **desarrollado
 - Marcar tareas como completadas
 - Eliminar tareas
 - Editar tareas existentes
+- Filtros (completadas / pendientes)
 - Persistencia en LocalStorage
 - Demo online desplegada en Vercel
 
@@ -46,8 +47,6 @@ Este proyecto forma parte de mi entrenamiento para convertirme en **desarrollado
 - Conexión con backend (Node.js + Express)
 - Autenticación de usuarios (JWT)
 - Base de datos
-- Edición de tareas
-- Filtros (completadas / pendientes)
 - UI mejorada
 
 ---

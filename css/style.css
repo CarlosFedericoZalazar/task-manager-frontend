@@ -5,6 +5,16 @@ html, body{
     font-size: 16px;
 }
 
+.filter-btn {
+  background-color: rgb(174, 204, 205);
+}
+
+.filter-btn.active {
+  background-color: rgb(162, 168, 247);
+}
+
+
+
 body{
     background-color: rgb(242, 236, 231);
 }
@@ -75,12 +85,23 @@ body{
 }
 
 @media (max-width: 480px) {
-   #insert-data{
-    flex-direction: column;
-}
+    #insert-data {
+        flex-direction: column;
+    }
 
-#inputTarea, #btnAgregar {
-       margin-top: 20px;
-       font-size: 1.5rem;
-}
+    #inputTarea,
+    #btnAgregar {
+        margin-top: 0.3rem;
+        font-size: 1.5rem;
+    }
+    
+    .filter-btn{
+        margin-top: 0.5rem;
+        font-size: 1.2rem;
+    }
+
+    #title-header {
+        font-size: 2rem;
+        /* color: red; */
+    }
 }

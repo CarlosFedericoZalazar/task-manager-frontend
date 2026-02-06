@@ -2,15 +2,33 @@ import * as Tasks from "./task.js";
 import { saveOnLocalStorage } from "./utils.js";
 import { renderizar } from "./view.js";
 
+const buttonAll = document.getElementById("buttonAll");
+const buttonPending =document.getElementById("buttonPending");
+const buttonCompleted =document.getElementById("buttonCompleted");
+
+
+
 const buttonAgregar = document.getElementById("btnAgregar");
 const inputTareas = document.getElementById("inputTarea");
 const lista = document.getElementById("lista");
+
 let editingId = undefined;
+let currentFilter = "all"; 
 
 let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
 
 function actualizarVista() {
-    renderizar(lista, tareas, {
+    let tareasVisibles = tareas;
+
+    if (currentFilter === "pending") {
+        tareasVisibles = tareas.filter(t => !t.completada);
+    }
+
+    if (currentFilter === "completed") {
+        tareasVisibles = tareas.filter(t => t.completada);
+    }
+
+    renderizar(lista, tareasVisibles, {
         onToggle: (id) => {
             tareas = Tasks.toggleTarea(tareas, id);
             refresh();
@@ -26,6 +44,7 @@ function actualizarVista() {
         }
     });
 }
+
 
 function refresh(){
     saveOnLocalStorage(tareas);
@@ -50,3 +69,29 @@ buttonAgregar.addEventListener("click", () => {
         buttonAgregar.textContent = "Agregar";
     }
 });
+
+buttonAll.addEventListener("click",()=>{
+    resetBtnFilters();
+    currentFilter = "all";
+    actualizarVista();
+})
+
+buttonPending.addEventListener("click",()=>{
+    resetBtnFilters();
+    currentFilter = "pending";
+    buttonPending.classList.add("active");
+    actualizarVista();
+})
+
+buttonCompleted.addEventListener("click",()=>{
+    resetBtnFilters();
+    currentFilter = "completed";
+    buttonCompleted.classList.add("active");
+    actualizarVista();
+})
+
+function resetBtnFilters() {
+    buttonAll.classList.remove("active");
+    buttonPending.classList.remove("active");
+    buttonCompleted.classList.remove("active");
+}
