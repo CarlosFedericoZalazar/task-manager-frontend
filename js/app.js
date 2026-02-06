@@ -6,7 +6,7 @@ const buttonAll = document.getElementById("buttonAll");
 const buttonPending =document.getElementById("buttonPending");
 const buttonCompleted =document.getElementById("buttonCompleted");
 
-
+const textPending = document.getElementById("text-pending");
 
 const buttonAgregar = document.getElementById("btnAgregar");
 const inputTareas = document.getElementById("inputTarea");
@@ -16,6 +16,8 @@ let editingId = undefined;
 let currentFilter = "all"; 
 
 let datosCrudos = JSON.parse(localStorage.getItem("tareas")) || [];
+
+console.log(datosCrudos);
 let tareas = datosCrudos.map(t => new Task(t.texto, t.completada, t.id));
 
 function actualizarVista() {
@@ -28,7 +30,7 @@ function actualizarVista() {
     if (currentFilter === "completed") {
         tareasVisibles = tareas.filter(t => t.completada);
     }
-
+    writeTextPending();
     renderizar(lista, tareasVisibles, {
         onToggle: (tarea) => { 
             tarea.toggle(); 
@@ -46,13 +48,21 @@ function actualizarVista() {
     });
 }
 
+function writeTextPending(){
+    let incompletas = tareas.filter(t => !t.completada).length;
+    let total = datosCrudos.length;    
+    textPending.textContent = `Pendientes ${incompletas}/${total}`;
+}
+
 
 function refresh(){
+    // pending();
     saveOnLocalStorage(tareas);
     actualizarVista();
 }
 
 actualizarVista();
+// pending();
 
 buttonAgregar.addEventListener("click", () => {
     if(buttonAgregar.textContent === "Agregar"){        

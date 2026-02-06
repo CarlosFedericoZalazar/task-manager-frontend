@@ -12,12 +12,28 @@ body {
     padding: 20px;
 }
 
+#header{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#main {
+    width: 100%;           
+    max-width: 600px;      
+    margin: 0 auto;       
+    display: flex;
+    flex-direction: column;
+}
 #title-header {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     text-align: center;
     margin-bottom: 2rem;
     letter-spacing: -0.5px;
+}
+
+#text-pending{
+    padding-top: 2rem;
 }
 
 /* El contenedor del Input (Efecto Card) */
@@ -100,7 +116,21 @@ body {
 }
 
 @media (max-width: 480px) {
-    #lista {
-        max-width: 500px;
+    body {
+        padding: 10px; /* Menos espacio en los bordes para aprovechar la pantalla */
+    }
+    
+    #insert-data {
+        flex-direction: column; /* Input arriba, botón abajo si es muy estrecho */
+        gap: 10px;
+    }
+    
+    #btnAgregar {
+        width: 100%; /* Botón ancho para que sea fácil tocar con el dedo */
+    }
+
+    #div-filters {
+        justify-content: center; /* Centra los filtros en móvil */
+        flex-wrap: wrap;         /* Si no caben, que bajen a la siguiente línea */
     }
 }

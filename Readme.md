@@ -8,6 +8,12 @@ Este proyecto sigue una separación simple de responsabilidades:
 - `view.js` – renderizado de la interfaz y manejo del DOM  
 - `utils.js` – persistencia (localStorage)
 
+Clase Task: representa una tarea con propiedades como id, título, descripción, estado (completada o pendiente) y métodos para actualizar su estado.
+
+- toggle() → marca o desmarca la tarea como completada
+
+- update(texto) → actualiza el contenido de la tarea
+
 La interfaz se construye a partir del estado.  
 Todas las acciones del usuario se manejan mediante callbacks que se envían desde `app.js` hacia `view.js`.
 
@@ -38,8 +44,8 @@ Este proyecto forma parte de mi entrenamiento para convertirme en **desarrollado
 * Filtrar tareas (Todas / Pendientes / Completadas)
 * Eliminar tareas
 * Persistencia en LocalStorage
+* UI responsiva y amigable
 * Demo online en Vercel
-
 
 ---
 
@@ -48,7 +54,6 @@ Este proyecto forma parte de mi entrenamiento para convertirme en **desarrollado
 - Conexión con backend (Node.js + Express)
 - Autenticación de usuarios (JWT)
 - Base de datos
-- UI mejorada
 
 ---
 
