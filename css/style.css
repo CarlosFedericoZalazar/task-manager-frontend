@@ -36,8 +36,7 @@ body{
     align-items: center;
 }
 #insert-data{
-    display: flex;
-    flex-direction: column;
+    display: flex;    
     align-items: center;
     margin-top: 5px;
     padding: 10px;
@@ -45,19 +44,10 @@ body{
     height: fit-content;
 }
 
-#insert-data h2{
-    text-shadow: 1px 1px 5px red;
+#inputTarea, #btnAgregar {
+  font-size: 1rem;
 }
 
-#insert-data h2:hover{
-    transform: scale(1.2);
-    transform-origin: center;
-    transition: all linear 200ms;
-    border: 1px solid blue;
-    border-radius: 5px;
-    padding: 3px;
-    background-color: aquamarine;
-}
 
 .data{
     display: flex;
@@ -84,3 +74,13 @@ body{
     text-decoration: line-through;
 }
 
+@media (max-width: 480px) {
+   #insert-data{
+    flex-direction: column;
+}
+
+#inputTarea, #btnAgregar {
+       margin-top: 20px;
+       font-size: 1.5rem;
+}
+}

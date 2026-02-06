@@ -37,6 +37,7 @@ Este proyecto forma parte de mi entrenamiento para convertirme en **desarrollado
 - Eliminar tareas
 - Editar tareas existentes
 - Persistencia en LocalStorage
+- Demo online desplegada en Vercel
 
 ---
 
@@ -65,3 +66,9 @@ task-manager-frontend/
 │   ├── tasks.js
 │   └── views.js
 └── README.md
+
+## 🌐 Demo en vivo
+
+Podés probar la aplicación funcionando en el siguiente enlace:
+
+👉 https://task-manager-frontend-kappa-sooty.vercel.app/
