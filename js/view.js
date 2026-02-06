@@ -1,10 +1,9 @@
-// view.js
 export function renderizar(lista, tareas, handlers) {
     lista.textContent = "";
 
     for (let t of tareas) {
         const item = document.createElement("li");
-        item.className = "data";
+        item.className = "data task-item";
 
         const textoSpan = document.createElement("span");
         textoSpan.className = "texto";
@@ -15,7 +14,7 @@ export function renderizar(lista, tareas, handlers) {
         }
 
         textoSpan.addEventListener("click", () => {
-            handlers.onToggle(t.id);
+            handlers.onToggle(t);
         });
         const divButtons = document.createElement("div");
         divButtons.className = "div-buttons";
@@ -26,7 +25,7 @@ export function renderizar(lista, tareas, handlers) {
 
         botonEdit.addEventListener("click", () => {
             if (!t.completada) {
-                handlers.onUpdate(t.id, t.texto);
+                handlers.onUpdate(t);
             }
         });
 
@@ -35,7 +34,7 @@ export function renderizar(lista, tareas, handlers) {
         botonDel.innerText = "❌";
 
         botonDel.addEventListener("click", () => {
-            handlers.onDelete(t.id);
+            handlers.onDelete(t);
         });
 
         item.appendChild(textoSpan);

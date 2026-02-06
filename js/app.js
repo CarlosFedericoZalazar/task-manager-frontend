@@ -1,4 +1,4 @@
-import * as Tasks from "./task.js";
+import {Task} from "./task.js";
 import { saveOnLocalStorage } from "./utils.js";
 import { renderizar } from "./view.js";
 
@@ -15,7 +15,8 @@ const lista = document.getElementById("lista");
 let editingId = undefined;
 let currentFilter = "all"; 
 
-let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
+let datosCrudos = JSON.parse(localStorage.getItem("tareas")) || [];
+let tareas = datosCrudos.map(t => new Task(t.texto, t.completada, t.id));
 
 function actualizarVista() {
     let tareasVisibles = tareas;
@@ -29,17 +30,17 @@ function actualizarVista() {
     }
 
     renderizar(lista, tareasVisibles, {
-        onToggle: (id) => {
-            tareas = Tasks.toggleTarea(tareas, id);
+        onToggle: (tarea) => { 
+            tarea.toggle(); 
             refresh();
         },
-        onDelete: (id) => {
-            tareas = Tasks.borrar(tareas, id);
+        onDelete: (tarea) => {
+            tareas = tareas.filter(t => t !== tarea);
             refresh();
         },
-        onUpdate: (id, texto) => {
-            editingId = id;
-            inputTareas.value = texto;            
+        onUpdate: (tarea) => {
+            editingId = tarea.id;
+            inputTareas.value = tarea.texto;
             buttonAgregar.textContent = "Modificar";
         }
     });
@@ -56,16 +57,19 @@ actualizarVista();
 buttonAgregar.addEventListener("click", () => {
     if(buttonAgregar.textContent === "Agregar"){        
         if (inputTareas.value.trim() !== "") {
-            tareas = [...tareas, Tasks.addTarea(inputTareas.value)];
+            tareas = [...tareas, Task.addTask(inputTareas.value)];
             refresh();
             inputTareas.value = "";
         }
     }
     else{
-        tareas = Tasks.updateTask(tareas, editingId, inputTareas.value);
+        const tarea = tareas.find(t => t.id === editingId);
+        if (tarea) {
+            tarea.updateTask(inputTareas.value);
+        }
+        refresh();
         inputTareas.value = "";
         editingId = undefined;
-        refresh();
         buttonAgregar.textContent = "Agregar";
     }
 });

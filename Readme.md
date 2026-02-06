@@ -31,14 +31,15 @@ Este proyecto forma parte de mi entrenamiento para convertirme en **desarrollado
 
 ## 📦 Funcionalidades actuales
 
-- Crear tareas
-- Listar tareas
-- Marcar tareas como completadas
-- Eliminar tareas
-- Editar tareas existentes
-- Filtros (completadas / pendientes)
-- Persistencia en LocalStorage
-- Demo online desplegada en Vercel
+* Crear tareas
+* Listar tareas
+* Editar tareas
+* Marcar tareas como completadas
+* Filtrar tareas (Todas / Pendientes / Completadas)
+* Eliminar tareas
+* Persistencia en LocalStorage
+* Demo online en Vercel
+
 
 ---
 

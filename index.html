@@ -5,23 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <title>CRUD TAREAS</title>
 </head>
 
 <body>
     <header id="header">
-        <h1 id="title-header">CRUD TAREAS</h1>
+        <h1 id="title-header">MIS TAREAS</h1>
     </header>
 
     <main id="main">
         <div id="insert-data">
             <input id="inputTarea" placeholder="Nueva tarea">
-            <button id="btnAgregar">Agregar</button>
+            <button id="btnAgregar" class = "buttons">Agregar</button>
         </div>
         <div id="div-filters">
-            <button id="buttonAll" class="filter-btn">Todas</button>
-            <button id="buttonPending" class="filter-btn">Pendientes</button>
-            <button id="buttonCompleted" class="filter-btn">Completadas</button>
+            <button id="buttonAll" class="filter-btn buttons">Todas</button>
+            <button id="buttonPending" class="filter-btn buttons">Pendientes</button>
+            <button id="buttonCompleted" class="filter-btn buttons">Completadas</button>
         </div>
         <div id="list-data">
             <ul id="lista"></ul>
