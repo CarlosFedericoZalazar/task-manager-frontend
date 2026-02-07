@@ -1,6 +1,7 @@
 import {Task} from "./task.js";
 import { saveOnLocalStorage } from "./utils.js";
 import { renderizar } from "./view.js";
+import * as api from "./api.js";
 
 const buttonAll = document.getElementById("buttonAll");
 const buttonPending =document.getElementById("buttonPending");
@@ -15,10 +16,19 @@ const lista = document.getElementById("lista");
 let editingId = undefined;
 let currentFilter = "all"; 
 
-let datosCrudos = JSON.parse(localStorage.getItem("tareas")) || [];
+let tareas;
+// let datosCrudos = JSON.parse(localStorage.getItem("tareas")) || [];
 
-console.log(datosCrudos);
-let tareas = datosCrudos.map(t => new Task(t.texto, t.completada, t.id));
+// console.log(datosCrudos);
+// let tareas = datosCrudos.map(t => new Task(t.texto, t.completada, t.id));
+
+async function cargarTareas() {
+    const res = await api.getTasks();
+    tareas = res.data;
+    actualizarVista();
+}
+
+cargarTareas();
 
 function actualizarVista() {
     let tareasVisibles = tareas;
@@ -32,13 +42,13 @@ function actualizarVista() {
     }
     writeTextPending();
     renderizar(lista, tareasVisibles, {
-        onToggle: (tarea) => { 
-            tarea.toggle(); 
-            refresh();
-        },
-        onDelete: (tarea) => {
-            tareas = tareas.filter(t => t !== tarea);
-            refresh();
+        onToggle: async (tarea) => {
+            await api.toggleTask(tarea.id, !tarea.completada);
+            await refresh();
+        },   
+        onDelete: async (tarea) => {
+            await api.deleteTask(tarea.id);
+            await refresh();
         },
         onUpdate: (tarea) => {
             editingId = tarea.id;
@@ -50,39 +60,31 @@ function actualizarVista() {
 
 function writeTextPending(){
     let incompletas = tareas.filter(t => !t.completada).length;
-    let total = datosCrudos.length;    
+    let total = tareas.length;    
     textPending.textContent = `Pendientes ${incompletas}/${total}`;
 }
 
 
-function refresh(){
-    // pending();
-    saveOnLocalStorage(tareas);
-    actualizarVista();
+async function refresh(){
+    await cargarTareas();
 }
 
-actualizarVista();
-// pending();
-
-buttonAgregar.addEventListener("click", () => {
-    if(buttonAgregar.textContent === "Agregar"){        
+buttonAgregar.addEventListener("click", async () => {
+    if (buttonAgregar.textContent === "Agregar") {        
         if (inputTareas.value.trim() !== "") {
-            tareas = [...tareas, Task.addTask(inputTareas.value)];
-            refresh();
+            await api.createTask(inputTareas.value);   // ⬅️ ESPERAR
+            await refresh();                           // ⬅️ luego recargar
             inputTareas.value = "";
         }
-    }
-    else{
-        const tarea = tareas.find(t => t.id === editingId);
-        if (tarea) {
-            tarea.updateTask(inputTareas.value);
-        }
-        refresh();
+    } else {
+        await api.updateTask(editingId, inputTareas.value); // ← cuando implementes update real
+        await refresh();
         inputTareas.value = "";
         editingId = undefined;
         buttonAgregar.textContent = "Agregar";
     }
 });
+
 
 buttonAll.addEventListener("click",()=>{
     resetBtnFilters();
@@ -97,12 +99,12 @@ buttonPending.addEventListener("click",()=>{
     actualizarVista();
 })
 
-buttonCompleted.addEventListener("click",()=>{
+buttonCompleted.addEventListener("click", ()=>{
     resetBtnFilters();
     currentFilter = "completed";
     buttonCompleted.classList.add("active");
     actualizarVista();
-})
+});
 
 function resetBtnFilters() {
     buttonAll.classList.remove("active");
