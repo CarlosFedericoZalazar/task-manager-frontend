@@ -1,5 +1,3 @@
-import {Task} from "./task.js";
-import { saveOnLocalStorage } from "./utils.js";
 import { renderizar } from "./view.js";
 import * as api from "./api.js";
 
@@ -17,10 +15,6 @@ let editingId = undefined;
 let currentFilter = "all"; 
 
 let tareas;
-// let datosCrudos = JSON.parse(localStorage.getItem("tareas")) || [];
-
-// console.log(datosCrudos);
-// let tareas = datosCrudos.map(t => new Task(t.texto, t.completada, t.id));
 
 async function cargarTareas() {
     const res = await api.getTasks();
@@ -64,7 +58,6 @@ function writeTextPending(){
     textPending.textContent = `Pendientes ${incompletas}/${total}`;
 }
 
-
 async function refresh(){
     await cargarTareas();
 }
@@ -88,8 +81,6 @@ buttonAgregar.addEventListener("click", async () => {
         buttonAgregar.textContent = "Agregar";
     }
 });
-
-
 
 buttonAll.addEventListener("click",()=>{
     resetBtnFilters();

@@ -1,11 +1,19 @@
 # 📝 Task Manager – Frontend
+## Descripción
+Este proyecto es el frontend de una aplicación de gestión de tareas (Task Manager) desarrollada con **JavaScript**. El objetivo principal es practicar la arquitectura de aplicaciones, el manejo del estado y el consumo de APIs.
+
+- Arquitectura limpia y modular
+- Interfaz intuitiva y responsiva
+- Manejo de tareas con funcionalidades completas (crear, editar, eliminar, marcar como completada)
+- Arquitectura limpia
 
 ## Arquitectura
 Este proyecto sigue una separación simple de responsabilidades:
 
 - `app.js` – estado de la aplicación y coordinación  
 - `task.js` – lógica de dominio de las tareas  
-- `view.js` – renderizado de la interfaz y manejo del DOM  
+- `view.js` – renderizado de la interfaz y manejo del DOM 
+- `api.js` – comunicación con el backend (REST API) 
 - `utils.js` – persistencia (localStorage)
 
 Clase Task: representa una tarea con propiedades como id, título, descripción, estado (completada o pendiente) y métodos para actualizar su estado.
@@ -32,6 +40,7 @@ Este proyecto forma parte de mi entrenamiento para convertirme en **desarrollado
 - Fetch API
 - LocalStorage (por ahora)
 - Git & GitHub
+- Vercel (deploy frontend)
 
 ---
 
@@ -45,6 +54,7 @@ Este proyecto forma parte de mi entrenamiento para convertirme en **desarrollado
 * Eliminar tareas
 * Persistencia en LocalStorage
 * UI responsiva y amigable
+* Persistencia en base de datos (vía API)
 * Demo online en Vercel
 
 ---

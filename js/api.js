@@ -16,7 +16,7 @@ export async function createTask(texto) {
 }
 
 export async function toggleTask(id) {
-    const res = await fetch(`${API_URL}/tasks/toggle/${id}`, {
+    const res = await fetch(`${API_URL}/tasks/${id}/toggle`, {
         method: "PUT"
     });
     return res.json();
